@@ -5,7 +5,7 @@ This is a Flask web application that allows users to automatically translate a v
 
 ## Prerequisites
 - Python 3.7+
-- An [ElevenLabs](https://elevenlabs.com) API key.
+- An [ElevenLabs](https://elevenlabs.io) API key.
 
 ## Setup Instructions
 
