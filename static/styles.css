@@ -1,0 +1,89 @@
+/* static/styles.css */
+
+/* General body styling */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f8f9fa;
+    overflow-x: hidden;
+}
+
+/* Sidebar styling */
+.sidebar {
+    width: 300px;
+    position: fixed;
+    height: 100%;
+    background-color: #343a40;
+    color: white;
+    padding: 20px;
+    z-index: 1000;
+    overflow-y: auto;
+    transition: transform 0.3s ease;
+}
+
+.sidebar-header {
+    display: flex;
+    align-items: center;
+}
+
+.sidebar h2 {
+    color: #f9a825;
+    margin-top: 10px;
+}
+
+.sidebar-hidden {
+    transform: translateX(-100%);
+}
+
+/* Main content shift when sidebar is toggled */
+#main-container {
+    margin-left: 320px;
+    transition: margin-left 0.3s ease;
+}
+
+/* Toggle button styling */
+.toggle-btn {
+    background: none;
+    border: none;
+    color: #f9a825;
+    font-size: 24px;
+    cursor: pointer;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 1100;
+}
+
+/* Custom file input styling */
+.custom-file-input {
+    cursor: pointer;
+}
+
+.custom-file-label {
+    display: inline-block;
+    padding: 10px;
+    background-color: #28a745;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.custom-file-label::after {
+    content: 'Browse';
+    padding: 10px;
+    background-color: #218838;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Video styling */
+.video-container {
+    max-width: 50%; /* Limit video to half the container width */
+    margin: 0 auto;
+}
+
+/* Button styling */
+.btn {
+    font-size: 16px;
+    margin-top: 20px;
+}

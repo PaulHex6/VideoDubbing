@@ -72,7 +72,7 @@ def create_dub_from_file(input_file_path: str, file_format: str, source_language
             file=(os.path.basename(input_file_path), audio_file, file_format),
             target_lang=target_language,
             source_lang=source_language,
-            num_speakers=1,
+            num_speakers=0,
             watermark=True,
         )
 

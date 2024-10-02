@@ -1,26 +1,30 @@
-<!doctype html>
-<html>
-<head>
-    <title>Translated Video</title>
-</head>
-<body>
-    <h1>Translated Video</h1>
-    <!-- Flash messages for status updates -->
-    {% with messages = get_flashed_messages() %}
-        {% if messages %}
-            <ul>
-            {% for message in messages %}
-                <li>{{ message }}</li>
-            {% endfor %}
-            </ul>
-        {% endif %}
-    {% endwith %}
-    
-    <video width="640" height="480" controls>
-        <source src="{{ url_for('download_file', file_path=file_path) }}" type="video/mp4">
-        Your browser does not support the video tag.
-    </video>
-    <br>
-    <a href="{{ url_for('download_file', file_path=file_path) }}">Download Translated Video</a>
-</body>
-</html>
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="header mb-4">
+    <h1 class="text-center">Translated Video</h1>
+</div>
+
+<!-- Flash messages for status updates -->
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <div class="alert alert-info text-center" role="alert">
+        {% for message in messages %}
+        <p>{{ message }}</p>
+        {% endfor %}
+    </div>
+    {% endif %}
+{% endwith %}
+
+<!-- Video Player Card -->
+<div class="card shadow-lg mt-4">
+    <div class="card-body">
+        <!-- Limit the video to half the width of the container -->
+        <video class="w-50 mb-3" controls>
+            <source src="{{ url_for('download_file', file_path=file_path) }}" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <a href="{{ url_for('download_file', file_path=file_path) }}" class="btn btn-success btn-block">Download Translated Video</a>
+    </div>
+</div>
+{% endblock %}

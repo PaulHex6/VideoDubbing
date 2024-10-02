@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Translation</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="icon" href="{{ url_for('static', filename='favicon.png') }}" type="image/png">
+    <script>
+        // Function to toggle the sidebar visibility
+        function toggleSidebar() {
+            var sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('sidebar-hidden');
+        }
+        
+        // Update file input label with the selected file name
+        function updateFileName(input) {
+            var fileName = input.files[0].name;
+            var label = document.querySelector('.custom-file-label');
+            label.textContent = fileName;
+        }
+    </script>
+</head>
+
+<body>
+    <div class="d-flex">
+        <!-- Sidebar -->
+        <div id="sidebar" class="sidebar bg-dark text-white">
+            <button class="toggle-btn" onclick="toggleSidebar()">☰</button>
+            <div class="sidebar-header mt-4">
+                <img src="{{ url_for('static', filename='favicon.png') }}" alt="Logo" style="width: 30px; vertical-align: middle;">
+                <h2 class="d-inline-block ml-2">Video Translation</h2>
+            </div>
+            <p class="mt-4">Upload a video and automatically translate its content from one language to another in just a few clicks.</p>
+            <hr class="border-secondary">
+            <h5>How to Use:</h5>
+            <ul class="pl-3">
+                <li>Upload your MP4 video file.</li>
+                <li>Click "Upload and Translate" to start processing.</li>
+                <li>View and download the translated video on the next page.</li>
+            </ul>
+            <hr class="border-secondary">
+            <p>Experience seamless video content translation in a user-friendly interface.</p>
+        </div>
+
+        <!-- Main Content Area -->
+        <div id="main-container" class="container-fluid p-4">
+            {% block content %}{% endblock %}
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
