@@ -1,0 +1,27 @@
+<!doctype html>
+<html>
+<head>
+    <title>Translated Video</title>
+</head>
+<body>
+    <h1>Translated Video</h1>
+    <!-- Flash messages for status updates -->
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul>
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+    
+    <video width="640" height="480" controls>
+        <source src="{{ file_url }}" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+    <br>
+    <a href="{{ url_for('download_file', file_path=file_path) }}">Download Translated Video</a>
+</body>
+</html>
+    

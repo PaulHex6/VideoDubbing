@@ -1,0 +1,24 @@
+<!doctype html>
+<html>
+<head>
+    <title>Upload MP4 File</title>
+</head>
+<body>
+    <h1>Upload MP4 File</h1>
+    <!-- Flash messages for status updates -->
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul>
+            {% for message in messages %}
+                <li>{{ message }}</li>
+            {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+    
+    <form method="post" enctype="multipart/form-data">
+        <input type="file" name="file">
+        <input type="submit" value="Upload and Translate">
+    </form>
+</body>
+</html>
