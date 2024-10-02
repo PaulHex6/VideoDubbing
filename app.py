@@ -77,6 +77,8 @@ def create_dub_from_file(input_file_path: str, file_format: str, source_language
         )
 
     dubbing_id = response.dubbing_id
+    flash('Dubbing in progress, please wait...')
+    
     if wait_for_dubbing_completion(dubbing_id):
         output_file_path = download_dubbed_file(dubbing_id, target_language)
         return output_file_path
@@ -102,9 +104,6 @@ def upload_file():
             input_path = os.path.join(app.config['UPLOAD_FOLDER'], filename)
             file.save(input_path)
 
-            # Display a message while processing
-            flash('Dubbing in progress, please wait...')
-
             # Perform dubbing
             output_path = create_dub_from_file(input_path, "audio/mpeg", 'zh', 'en')
             if output_path:
@@ -122,7 +121,7 @@ def translated_file():
     file_path = request.args.get('file_path')
     if file_path and os.path.exists(file_path):
         # Create the correct file URL for the video player
-        file_url = '/' + file_path.replace('\\', '/')
+        file_url = url_for('static', filename=file_path.replace('\\', '/'))
         return render_template('translated.html', file_url=file_url, file_path=file_path)
     else:
         flash('File not found')

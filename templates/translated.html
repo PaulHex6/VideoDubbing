@@ -17,11 +17,10 @@
     {% endwith %}
     
     <video width="640" height="480" controls>
-        <source src="{{ file_url }}" type="video/mp4">
+        <source src="{{ url_for('download_file', file_path=file_path) }}" type="video/mp4">
         Your browser does not support the video tag.
     </video>
     <br>
     <a href="{{ url_for('download_file', file_path=file_path) }}">Download Translated Video</a>
 </body>
 </html>
-    
