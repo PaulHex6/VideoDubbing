@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+
+{% block title %}Upload Video{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <!-- Page Heading -->
+    <h1 class="h3 mb-4 text-gray-800">Upload and Process Video</h1>
+
+    <!-- File Upload Section -->
+    <div class="mb-4">
+        <div class="btn-group">
+            <!-- Split Button for File Upload -->
+            <button id="uploadButton" class="btn btn-light dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-upload"></i> Upload Video
+            </button>
+            <input type="file" id="videoUpload" accept="video/mp4" style="display: none;">
+        </div>
+
+        <p id="fileName" class="mt-2"></p>
+    </div>
+
+    <!-- Process Video Button -->
+    <button id="processButton" class="btn btn-primary" disabled>Process the Video</button>
+
+    <!-- Flash Messages -->
+    <div id="flashMessages" class="mt-4"></div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+    document.getElementById('uploadButton').addEventListener('click', function () {
+        document.getElementById('videoUpload').click();
+    });
+
+    document.getElementById('videoUpload').addEventListener('change', function () {
+        const file = this.files[0];
+
+        if (file && file.type === 'video/mp4') {
+            document.getElementById('fileName').innerText = 'Selected file: ' + file.name;
+
+            // Change the upload button to success
+            const uploadButton = document.getElementById('uploadButton');
+            uploadButton.classList.remove('btn-light');
+            uploadButton.classList.add('btn-success');
+            uploadButton.innerHTML = `<i class="fas fa-check"></i> ${file.name}`;
+
+            // Enable the process button
+            document.getElementById('processButton').disabled = false;
+        } else {
+            alert('Please select a valid MP4 video file.');
+        }
+    });
+
+    document.getElementById('processButton').addEventListener('click', function () {
+        const fileInput = document.getElementById('videoUpload');
+        const file = fileInput.files[0];
+
+        if (!file) {
+            alert('No file selected!');
+            return;
+        }
+
+        // Create FormData to send file via AJAX
+        const formData = new FormData();
+        formData.append('file', file);
+
+        // Disable the button to prevent multiple submissions
+        this.disabled = true;
+
+        // AJAX request to upload and process the video
+        fetch('/', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('flashMessages').innerHTML = data;
+            // Enable the button again
+            this.disabled = false;
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('An error occurred while processing the video.');
+            this.disabled = false;
+        });
+    });
+</script>
+{% endblock %}

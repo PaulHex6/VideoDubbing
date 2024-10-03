@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %}Processed Files History{% endblock %}
+
+{% block content %}
+<div class="container-fluid">
+    <!-- Page Heading -->
+    <h1 class="h3 mb-4 text-gray-800">Processed Files History</h1>
+
+    <!-- History Table -->
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Filename</th>
+                <th>View</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for file in video_files %}
+            <tr>
+                <td>{{ file.filename }}</td>
+                <td>
+                    <a href="{{ url_for('translated_file', file_id=file.id) }}" class="btn btn-primary">View</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
